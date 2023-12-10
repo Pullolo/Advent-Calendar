@@ -1,0 +1,4 @@
+name: AdventCalendar
+version: '${project.version}'
+main: net.pullolo.adventcalendar.AdventCalendar
+api-version: '1.20'
