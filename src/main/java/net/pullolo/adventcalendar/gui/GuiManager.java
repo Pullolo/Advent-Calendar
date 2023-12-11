@@ -63,6 +63,7 @@ public class GuiManager {
     }
 
     public InventoryGui createAdventGui(Player p){
+        final Random random = new Random(stringToSeed(p.getDisplayName()));
         String[] guiSetup = {
                 "    h    ",
                 " ppppppp ",
@@ -102,12 +103,12 @@ public class GuiManager {
             } else {
                 if (opened) {
                     group.addElement(new DynamicGuiElement('p', (viewer)->{
-                        return new StaticGuiElement('p', getRandomOpenedPresent(),
+                        return new StaticGuiElement('p', getRandomOpenedPresent(random),
                                 ChatColor.translateAlternateColorCodes('&', "&fDay &c" + j + " &e(Claimed)"));
                     }));
                 } else {
                     group.addElement((new DynamicGuiElement('p',(viewer)->{
-                        return new StaticGuiElement('p', getRandomPresent(), click -> {
+                        return new StaticGuiElement('p', getRandomPresent(random), click -> {
                             Player player = (Player) click.getWhoClicked();
                             getPlayerData(player).addCollectedDay(j);
                             click.getGui().close();
@@ -203,12 +204,23 @@ public class GuiManager {
         }
     }
 
-    public ItemStack getRandomPresent(){
-        return SkullCreator.itemFromBase64(presents.get(new Random().nextInt(presents.size())));
+    private long stringToSeed(String s) {
+        if (s == null) {
+            return 0;
+        }
+        long hash = 0;
+        for (char c : s.toCharArray()) {
+            hash = 31L*hash + c;
+        }
+        return hash;
     }
 
-    public ItemStack getRandomOpenedPresent(){
-        return SkullCreator.itemFromBase64(openedpresents.get(new Random().nextInt(openedpresents.size())));
+    public ItemStack getRandomPresent(Random r){
+        return SkullCreator.itemFromBase64(presents.get(r.nextInt(presents.size())));
+    }
+
+    public ItemStack getRandomOpenedPresent(Random r){
+        return SkullCreator.itemFromBase64(openedpresents.get(r.nextInt(openedpresents.size())));
     }
 
 
