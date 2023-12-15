@@ -135,7 +135,7 @@ public class GuiManager {
         Random r = new Random();
         int reps = r.nextInt(2)+2;
         for (int i = 0; i < reps; i++){
-            switch (r.nextInt(11)+1){
+            switch (r.nextInt(15)+1){
                 case 1:
                     items.add(new ItemStack(Material.DIAMOND, (int) (2 * mul)));
                     break;
@@ -169,6 +169,18 @@ public class GuiManager {
                     break;
                 case 10:
                     items.add(new ItemStack(Material.TOTEM_OF_UNDYING, 1));
+                    break;
+                case 11:
+                    items.add(new ItemStack(Material.SPONGE, 3));
+                    break;
+                case 12:
+                    items.add(new ItemStack(Material.COBBLESTONE, 21));
+                    break;
+                case 13:
+                    items.add(new ItemStack(Material.OAK_LOG, 7));
+                    break;
+                case 14:
+                    items.add(new ItemStack(Material.COOKED_BEEF, 8));
                     break;
                 default:
                     items.add(new ItemStack(Material.COAL, (int) (10 * mul)));
